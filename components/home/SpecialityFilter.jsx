@@ -21,7 +21,7 @@ export default function SpecialityFilter() {
                 className={`whitespace-nowrap rounded-full px-5 py-2 text-sm font-medium transition
                   ${
                     active === item
-                      ? 'bg-[#7400fd] text-white shadow'
+                      ? 'bg-indigo-600 text-white shadow'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
               >

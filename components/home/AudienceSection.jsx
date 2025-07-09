@@ -32,8 +32,8 @@ export default function AudienceSection() {
           return (
             <ScrollFadeIn key={index} delay={0.2}>
               <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition flex flex-col items-center text-center">
-                <Icon className="text-purple-700 mb-4 w-12 h-12" />
-                <h3 className="text-xl font-semibold text-purple-700 mb-3">{item.title}</h3>
+                <Icon className="text-indigo-700 mb-4 w-12 h-12" />
+                <h3 className="text-xl font-semibold text-indigo-700 mb-3">{item.title}</h3>
                 <p className="text-gray-700">{item.desc}</p>
               </div>
             </ScrollFadeIn>

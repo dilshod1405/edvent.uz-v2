@@ -131,14 +131,14 @@ export default function RegisterForm() {
 
         <button
           type="submit"
-          className="w-full bg-purple-700 text-white py-3 rounded-lg hover:bg-purple-800 transition font-medium"
+          className="w-full bg-indigo-700 text-white py-3 rounded-lg hover:bg-indigo-800 transition font-medium"
         >
           Ro‘yxatdan o‘tish
         </button>
 
         <p className="text-sm text-center text-gray-600 mt-4">
           Allaqachon akkauntingiz bormi?{' '}
-          <a href="/login" className="text-purple-700 font-semibold hover:underline">
+          <a href="/login" className="text-indigo-700 font-semibold hover:underline">
             Kirish
           </a>
         </p>

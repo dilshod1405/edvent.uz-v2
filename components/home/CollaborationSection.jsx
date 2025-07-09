@@ -52,7 +52,7 @@ export default function CollaborationSection() {
 
             <Link
               href="/collaboration"
-              className="inline-block bg-purple-700 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-800 transition"
+              className="inline-block bg-indigo-700 text-white px-6 py-3 rounded-lg font-medium hover:bg-indigo-800 transition"
             >
               Kurs joylashtirishni boshlang
             </Link>

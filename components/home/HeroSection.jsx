@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { FiSearch } from "react-icons/fi"
-import ScrollFadeIn from "../common/ScrollAnimation"
+import Image from "next/image"
 
 const slides = [
   {
@@ -11,24 +11,12 @@ const slides = [
     description: "Ijod va funksionallikni birlashtiring.",
   },
   {
-    title: "Qurilish muhandisligi asoslari",
-    description: "Mustahkam inshootlar siz bilan boshlanadi.",
-  },
-  {
     title: "Dasturlashni 0 dan boshlang",
     description: "Kelajak texnologiyalarini siz yarating.",
   },
   {
-    title: "Iqtisod va biznes asoslari",
-    description: "Pul oqimini boshqarishni o‘rganing.",
-  },
-  {
-    title: "UX/UI dizayn kurslari",
-    description: "Foydalanuvchi tajribasini yarating.",
-  },
-  {
-    title: "Sun’iy intellektga kirish",
-    description: "AI yordamida aqlli tizimlar tuzing.",
+    title: "Biznes va moliyaviy savodxonlik",
+    description: "Bozorni tushuning, qarorlarni aniq qabul qiling.",
   },
 ]
 
@@ -42,50 +30,63 @@ export default function HeroSection() {
     return () => clearInterval(interval)
   }, [])
 
-  const currentSlide = slides[index]
+  const currentSlide = slides[index] ?? slides[0]
 
   return (
-    <ScrollFadeIn>
-      <section className="mb-16 text-center px-4 py-12 sm:py-16">
-        <div className="min-h-[140px] sm:min-h-[160px] md:min-h-[180px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 text-gray-900 leading-tight">
-                {currentSlide.title}
-              </h2>
-              <p className="text-gray-600 mb-6 text-base sm:text-lg max-w-xl mx-auto px-2 sm:px-0">
-                {currentSlide.description}
-              </p>
-            </motion.div>
-          </AnimatePresence>
+    <section className="bg-white py-20 px-6">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
+        {/* LEFT */}
+        <div className="flex-1 text-center md:text-left">
+          {/* Static height wrapper to prevent layout shift */}
+          <div className="min-h-[160px] mb-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
+                  {currentSlide.title}
+                </h1>
+                <p className="text-gray-600 text-lg max-w-xl leading-relaxed mx-auto md:mx-0">
+                  {currentSlide.description}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Search Input */}
+          <div className="relative max-w-md mx-auto md:mx-0">
+            <FiSearch className="absolute top-1/2 left-5 -translate-y-1/2 text-indigo-700" size={20} />
+            <input
+              type="search"
+              placeholder="Kurs izlash..."
+              className="w-full rounded-full border border-gray-300 pl-14 pr-6 py-4 text-base text-gray-900 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition"
+            />
+          </div>
         </div>
 
+        {/* RIGHT IMAGE */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="relative max-w-xl mx-auto"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="flex-1 max-w-lg mx-auto md:mx-0"
         >
-          <FiSearch
-            className="absolute top-1/2 left-4 -translate-y-1/2 text-gray-400 pointer-events-none"
-            size={18}
-          />
-          <motion.input
-            type="search"
-            placeholder="Kurs izlash..."
-            initial={{ scale: 1 }}
-            whileFocus={{ scale: 1.03, boxShadow: "0 0 15px rgba(116, 0, 253, 0.6)" }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="w-full rounded-full border border-gray-300 pl-11 pr-5 py-3 text-base sm:text-lg text-gray-900 focus:outline-none focus:ring-4 focus:ring-purple-600 focus:border-purple-600 transition"
-          />
+          <div className="rounded-2xl shadow-xl overflow-hidden">
+            <Image
+              src="/images/hero-image.png"
+              alt="Hero illustration"
+              width={600}
+              height={400}
+              className="object-contain w-full h-auto"
+              priority
+            />
+          </div>
         </motion.div>
-      </section>
-    </ScrollFadeIn>
+      </div>
+    </section>
   )
 }

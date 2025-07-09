@@ -36,9 +36,9 @@ export default function BlogSection() {
               href={url}
               className="block p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition hover:-translate-y-1"
             >
-              <h3 className="text-xl font-semibold text-purple-700 mb-3">{title}</h3>
+              <h3 className="text-xl font-semibold text-indigo-700 mb-3">{title}</h3>
               <p className="text-gray-700">{excerpt}</p>
-              <button className="mt-4 text-purple-700 font-semibold hover:underline">
+              <button className="mt-4 text-indigo-700 font-semibold hover:underline">
                 Maqolani o‘qish →
               </button>
             </a>
@@ -48,7 +48,7 @@ export default function BlogSection() {
       <div className="flex justify-center">
         <a
           href="/blog"
-          className="inline-block bg-purple-700 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-purple-800 transition"
+          className="inline-block bg-indigo-700 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-indigo-800 transition"
         >
           Barchasini ko‘rish
         </a>

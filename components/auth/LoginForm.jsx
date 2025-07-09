@@ -42,13 +42,13 @@ export default function LoginForm() {
         </div>
 
         {/* Forgot Password + Register */}
-        <div className="flex justify-between text-sm text-purple-700 mb-4">
+        <div className="flex justify-between text-sm text-indigo-700 mb-4">
           <a href="/forgot-password" className="hover:underline">Parolni unutdingizmi?</a>
           <a href="/register" className="hover:underline">Ro‘yxatdan o‘tish</a>
         </div>
 
         {/* Submit Button */}
-        <button className="w-full bg-purple-700 text-white py-3 rounded-lg hover:bg-purple-800 transition font-medium mb-4 hover:cursor-pointer">
+        <button className="w-full bg-indigo-700 text-white py-3 rounded-lg hover:bg-indigo-800 transition font-medium mb-4 hover:cursor-pointer">
           Kirish
         </button>
 

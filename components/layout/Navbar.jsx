@@ -18,7 +18,7 @@ export default function Navbar() {
     <header className="border-b border-gray-200 px-6 py-4 bg-white sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Logo */}
-        <h1 className="text-xl font-bold text-purple-700 cursor-pointer">
+        <h1 className="text-xl font-bold text-indigo-700 cursor-pointer">
           <Link href="/">Edvent</Link>
         </h1>
 
@@ -29,7 +29,7 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               className={`hover:underline ${
-                link.special ? 'text-purple-700 font-semibold' : ''
+                link.special ? 'text-indigo-700 font-semibold' : ''
               }`}
             >
               {link.name}
