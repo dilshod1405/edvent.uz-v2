@@ -25,7 +25,7 @@ export default function ExaminationSection() {
           </p>
           <button
             onClick={() => router.push('/exams')}
-            className="bg-indigo-700 text-white px-7 py-3 rounded-md font-medium shadow-md hover:bg-indigo-800 transition duration-300"
+            className="bg-indigo-700 text-white px-7 py-3 rounded-md font-medium shadow-md hover:bg-indigo-800 transition duration-300 hover:cursor-pointer"
           >
             Imtihonni boshlash
           </button>

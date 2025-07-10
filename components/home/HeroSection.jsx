@@ -33,7 +33,7 @@ export default function HeroSection() {
   const currentSlide = slides[index] ?? slides[0]
 
   return (
-    <section className="bg-white py-20 px-6">
+    <section className="bg-white py-5 px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
         {/* LEFT */}
         <div className="flex-1 text-center md:text-left">

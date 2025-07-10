@@ -7,7 +7,7 @@ import ScrollFadeIn from '../common/ScrollAnimation'
 
 export default function CollaborationSection() {
   return (
-    <ScrollFadeIn delay={0.2}>
+
       <section className="bg-white py-20 px-4">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
           {/* Banner Image */}
@@ -59,6 +59,6 @@ export default function CollaborationSection() {
           </motion.div>
         </div>
       </section>
-    </ScrollFadeIn>
+   
   )
 }

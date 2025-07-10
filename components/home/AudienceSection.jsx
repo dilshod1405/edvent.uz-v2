@@ -24,7 +24,7 @@ const audience = [
 
 export default function AudienceSection() {
   return (
-    <section className="py-16 bg-white max-w-7xl mx-auto px-4 my-16 rounded-lg shadow-md">
+    <section className="bg-white max-w-7xl mx-auto px-4 my-16 rounded-lg shadow-md">
       <h2 className="text-3xl font-bold mb-10 text-gray-900 text-center">Siz uchun maxsus</h2>
       <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-3 max-w-5xl mx-auto">
         {audience.map((item, index) => {
