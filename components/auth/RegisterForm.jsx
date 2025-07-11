@@ -56,7 +56,7 @@ export default function RegisterForm() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="flex items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8"
+      className="flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8"
     >
       <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
         <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Ro‘yxatdan o‘tish</h2>

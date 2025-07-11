@@ -42,7 +42,7 @@ export default function LoginForm() {
       const userRes = await api.get(`/api/auth/users/${userId}/`)
       setUser(userRes.data)
 
-      router.push("/")
+      router.push(`/dashboard/${userId}/profile`)
     } catch (error) {
       alert("Email yoki parol noto‘g‘ri.")
       console.error(error.response?.data || error.message)
@@ -56,7 +56,7 @@ export default function LoginForm() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="flex items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8 min-h-screen"
+      className="flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8"
     >
       <form
         onSubmit={handleSubmit}

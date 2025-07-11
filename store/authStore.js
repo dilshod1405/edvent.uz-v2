@@ -1,12 +1,22 @@
-// authStore.js
-import { create } from "zustand";
+import { create } from 'zustand'
 
 export const useAuthStore = create((set) => ({
-  accessToken: null,
+  accessToken: typeof window !== 'undefined' ? localStorage.getItem('access') : null,
   user: null,
 
-  setToken: (token) => set({ accessToken: token }),
+  setToken: (token) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('access', token)
+    }
+    set({ accessToken: token })
+  },
+
   setUser: (user) => set({ user }),
 
-  clearAuth: () => set({ accessToken: null, user: null }),
-}));
+  clearAuth: () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('access')
+    }
+    set({ accessToken: null, user: null })
+  },
+}))
