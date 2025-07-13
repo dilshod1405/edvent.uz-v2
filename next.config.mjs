@@ -1,28 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "techhubsolutions.in",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "edvent.uz",
-        pathname: "/**",
-      },
-      {
-        protocol: "http",
-        hostname: "localhost",
-        pathname: "/**",
-      },
-      {
-        protocol: "http",
-        hostname: "127.0.0.1",
-        pathname: "/**",
-      },
-    ],
+    domains:  ['techhubsolutions.in', 'edvent.uz', 'localhost', '127.0.0.1']
   },
 }
 
