@@ -4,13 +4,14 @@ import React, { useState } from 'react'
 
 const specialities = [
   'Dasturlash', 'Arxitektura', 'Dizayn', 'Marketing', 'Iqtisodiyot',
+
 ]
 
 export default function SpecialityFilter() {
   const [active, setActive] = useState(specialities[0])
 
   return (
-    <section className="mb-8 w-full">
+    <section className="mb-8 w-full py-4 mb-4 mt-4">
       <div className="max-w-7xl mx-auto px-4">
         <div className="relative overflow-x-auto hide-scrollbar">
           <div className="flex gap-3 min-w-max pb-2 border-b border-gray-200 pr-10">

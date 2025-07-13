@@ -82,7 +82,7 @@ export default function Sidebar({ userId }) {
             onClick={() => {
               handleLogout()
             }}
-            className="flex items-center gap-3 px-4 py-2 rounded-lg font-medium text-red-600 hover:bg-red-100 w-full mt-4"
+            className="flex items-center gap-3 px-4 py-2 rounded-lg font-medium text-red-600 hover:bg-red-100 w-full mt-4 hover:cursor-pointer"
             type="button"
           >
             <svg

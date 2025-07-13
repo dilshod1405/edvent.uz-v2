@@ -1,9 +1,11 @@
-import dynamic from 'next/dynamic'
+'use client'
 
-const ProfileWrapper = dynamic(() => import('@/components/dashboard/ProfileWrapper'), {
- 
-})
+import { useParams } from 'next/navigation'
+import ProfileWrapper from '@/components/dashboard/ProfileWrapper'
 
-export default function ProfilePage({ params }) {
-  return <ProfileWrapper userId={params.id} />
+export default function ProfilePage() {
+  const params = useParams()
+  const userId = params.id
+
+  return <ProfileWrapper userId={userId} />
 }

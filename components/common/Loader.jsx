@@ -25,7 +25,7 @@ export default function Loader({ duration = 1500, onFinish }) {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "rgba(255, 255, 255, 0.8)", // orqa fonni kerak bo'lsa o'zgartiring
+        backgroundColor: "rgba(255, 255, 255, 0.8)",
         zIndex: 9999,
         padding: 20,
       }}

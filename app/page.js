@@ -1,8 +1,5 @@
 "use client";
-
-import AudienceSection from "@/components/home/AudienceSection";
-import BenefitsSection from "@/components/home/BenefitSection";
-import BlogSection from "@/components/home/BlogSection";
+import BlogSection from "@/components/home/NetworkGraph";
 import CallToAction from "@/components/home/CallToAction";
 import ChatBot from "@/components/home/ChatBot";
 import CollaborationSection from "@/components/home/CollaborationSection";
@@ -15,6 +12,7 @@ import VideoBanner from "@/components/home/VideoBanner";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import Loader from "@/components/common/Loader";
+import WhyEdventShowcase from "@/components/home/EdventShowCase";
 
 export default function Home() {
   return (
@@ -28,10 +26,9 @@ export default function Home() {
           <CourseSection />
           <StatsSection />
           <ExaminationSection />
-          <BenefitsSection />
           <CallToAction />
           <VideoBanner />
-          <AudienceSection />
+          <WhyEdventShowcase />
           <BlogSection />
           <CollaborationSection />
         </main>

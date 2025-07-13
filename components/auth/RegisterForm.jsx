@@ -1,24 +1,33 @@
 'use client'
+
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FiMail, FiUser, FiLock, FiImage, FiMapPin, FiAtSign } from 'react-icons/fi'
+import { FiMail, FiUser, FiLock, FiImage, FiMapPin, FiPhone } from 'react-icons/fi'
 import Image from 'next/image'
+import plainApi from '@/lib/plainApi'
+import VerifyCodeModal from '@/components/common/VerifyCodeModal'
+import Loader from '@/components/common/Loader'
+import DatePicker from '@/components/common/DatePicker'
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
     full_name: '',
-    username: '',
     email: '',
     address: '',
+    phone: '',
     password: '',
     photo: null,
   })
-
+  const [birthday, setBirthday] = useState(null)
   const [preview, setPreview] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [showModal, setShowModal] = useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
+    setErrorMessage(null)
   }
 
   const handlePhotoChange = (e) => {
@@ -29,121 +38,169 @@ export default function RegisterForm() {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
+    setErrorMessage(null)
 
     if (!formData.photo) {
-      alert("Iltimos, profil rasmni yuklang.")
+      setErrorMessage('Iltimos, profil rasmni yuklang.')
+      setLoading(false)
       return
     }
 
-    const data = new FormData()
-    data.append('full_name', formData.full_name)
-    data.append('username', formData.username)
-    data.append('email', formData.email)
-    data.append('address', formData.address)
-    data.append('password', formData.password)
-    if (formData.photo) {
+    try {
+      const data = new FormData()
+      data.append('full_name', formData.full_name)
+      data.append('email', formData.email)
+      data.append('address', formData.address)
+      data.append('phone', formData.phone)
+      data.append('password', formData.password)
       data.append('photo', formData.photo)
-    }
+      if (birthday) {
+        data.append('birthday', birthday.format('YYYY-MM-DD'))
+      }
 
-    console.log('Form submitted:', formData)
-    // TODO: Submit the form via fetch or axios
+      await plainApi.post('/api/auth/register/', data)
+
+      setShowModal(true)
+    } catch (error) {
+      const msg =
+        error?.response?.data?.detail ||
+        error?.response?.data?.message ||
+        error?.message ||
+        'Xatolik yuz berdi.'
+      setErrorMessage(msg)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8"
-    >
-      <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Ro‘yxatdan o‘tish</h2>
+    <>
+      {loading && <Loader />}
 
-        <FormInput
-          label="To‘liq ism"
-          name="full_name"
-          icon={<FiUser />}
-          value={formData.full_name}
-          onChange={handleChange}
-        />
-        <FormInput
-          label="Foydalanuvchi nomi"
-          name="username"
-          icon={<FiAtSign />}
-          value={formData.username}
-          onChange={handleChange}
-        />
-        <FormInput
-          label="Email"
-          name="email"
-          type="email"
-          icon={<FiMail />}
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <FormInput
-          label="Manzil"
-          name="address"
-          icon={<FiMapPin />}
-          value={formData.address}
-          onChange={handleChange}
-        />
-
-        {/* Photo Upload */}
-        <div className="mb-4">
-          <label className="block text-gray-700 mb-1">
-            Profil rasmi <span className="text-red-500">*</span>
-          </label>
-          <div className="flex items-center gap-4">
-            <label className="cursor-pointer inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg text-sm font-medium">
-              <FiImage className="mr-2" />
-              Rasm tanlash
-              <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handlePhotoChange}
-                required={!formData.photo}
-              />
-            </label>
-            {preview && (
-              <Image
-                src={preview}
-                alt="Preview"
-                width={96}
-                height={96}
-                className="w-24 h-24 object-cover rounded-full"
-              />
-            )}
-          </div>
-        </div>
-
-        <FormInput
-          label="Parol"
-          name="password"
-          type="password"
-          icon={<FiLock />}
-          value={formData.password}
-          onChange={handleChange}
-        />
-
-        <button
-          type="submit"
-          className="w-full bg-indigo-700 text-white py-3 rounded-lg hover:bg-indigo-800 transition font-medium"
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8"
+      >
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg"
+          noValidate
         >
-          Ro‘yxatdan o‘tish
-        </button>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Ro‘yxatdan o‘tish</h2>
 
-        <p className="text-sm text-center text-gray-600 mt-4">
-          Allaqachon akkauntingiz bormi?{' '}
-          <a href="/login" className="text-indigo-700 font-semibold hover:underline">
-            Kirish
-          </a>
-        </p>
-      </form>
-    </motion.section>
+          {errorMessage && (
+            <div className="mb-4 p-3 text-red-700 bg-red-100 border border-red-300 rounded">
+              {errorMessage}
+            </div>
+          )}
+
+          <FormInput
+            label="To‘liq ism"
+            name="full_name"
+            icon={<FiUser />}
+            value={formData.full_name}
+            onChange={handleChange}
+          />
+
+          <FormInput
+            label="Email"
+            name="email"
+            type="email"
+            icon={<FiMail />}
+            value={formData.email}
+            onChange={handleChange}
+          />
+
+          <FormInput
+            label="Manzil"
+            name="address"
+            icon={<FiMapPin />}
+            value={formData.address}
+            onChange={handleChange}
+          />
+
+          <FormInput
+            label="Telefon"
+            name="phone"
+            type="tel"
+            icon={<FiPhone />}
+            value={formData.phone}
+            onChange={handleChange}
+          />
+
+          <div className="mb-4">
+            <label className="block text-gray-700 mb-1">
+              Tug‘ilgan sana <span className="text-red-500">*</span>
+            </label>
+            <DatePicker date={birthday} setDate={setBirthday} />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 mb-1">
+              Profil rasmi <span className="text-red-500">*</span>
+            </label>
+            <div className="flex items-center gap-4">
+              <label className="cursor-pointer inline-flex items-center px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg text-sm font-medium">
+                <FiImage className="mr-2" />
+                Rasm tanlash
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handlePhotoChange}
+                />
+              </label>
+              {preview && (
+                <Image
+                  src={preview}
+                  alt="Preview"
+                  width={96}
+                  height={96}
+                  className="w-24 h-24 object-cover rounded-full"
+                />
+              )}
+            </div>
+          </div>
+
+          <FormInput
+            label="Parol"
+            name="password"
+            type="password"
+            icon={<FiLock />}
+            value={formData.password}
+            onChange={handleChange}
+          />
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full py-3 rounded-lg font-medium bg-indigo-700 hover:bg-indigo-800 text-white transition"
+          >
+            Ro‘yxatdan o‘tish
+          </button>
+
+          <p className="text-sm text-center text-gray-600 mt-4">
+            Allaqachon akkauntingiz bormi?{' '}
+            <a href="/login" className="text-indigo-700 font-semibold hover:underline">
+              Kirish
+            </a>
+          </p>
+        </form>
+      </motion.section>
+
+      {showModal && (
+        <VerifyCodeModal
+          email={formData.email}
+          password={formData.password}
+          onClose={() => setShowModal(false)}
+        />
+      )}
+    </>
   )
 }
 
@@ -157,9 +214,9 @@ function FormInput({ label, name, type = 'text', icon, value, onChange }) {
         <div className="text-gray-400 mr-2">{icon}</div>
         <input
           name={name}
+          type={type}
           value={value}
           onChange={onChange}
-          type={type}
           placeholder={label}
           required
           className="w-full outline-none text-gray-800 placeholder-gray-400"
